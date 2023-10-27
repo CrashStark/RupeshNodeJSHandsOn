@@ -1,14 +1,15 @@
+const { error } = require('console');
+const {createReadStream}=require('fs');
+const stream = 
+createReadStream('./content/big.txt',
+{highWaterMark:90000,encoding:'utf-8'});
 
+stream.on('data',(result)=>
+{
+    console.log(result);
+})
 
-const eventEmitter = require('events');
-const customEmitter = new eventEmitter();
-
-customEmitter.on('response', (name) => {
-    console.log(`data received ${name}`);
+stream.on('error',()=>
+{
+    console.log(error);
 });
-
-customEmitter.on('response', () => {
-    console.log(`some other logic here`);
-});
-
-customEmitter.emit('response','john');
