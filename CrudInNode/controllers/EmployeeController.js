@@ -5,13 +5,14 @@ const index = (req, res, next) => {
         .then(response => {
             res.json({
                 response
-            }).catch(error => {
-                res.json({
-                    message: 'An error Occured'
-                })
-            })
+            });
         })
-}
+        .catch(error => {
+            res.status(500).json({
+                message: 'An error occurred'
+            });
+        });
+};
 
 const show = (req, res, next) => {
     let employeeId = req.body.employeeId;
